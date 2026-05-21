@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+url = "https://raw.githubusercontent.com/plotly/datasets/master/diabetes.csv"
 df = pd.read_csv(url)
 
 model.fit(X, y)
