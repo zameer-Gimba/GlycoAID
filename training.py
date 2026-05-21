@@ -1,7 +1,6 @@
 # Import libraries
 import pandas as pd
 import numpy as np
-import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -63,8 +62,5 @@ print("Tree Accuracy:", tree_acc)
 # Select best model
 best_model = log_model if log_acc > tree_acc else tree_model
 
-# Save model and scaler
-joblib.dump(best_model, "model.pkl")
-joblib.dump(scaler, "scaler.pkl")
 
 print("Model and scaler saved successfully!")
