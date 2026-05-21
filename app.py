@@ -1,16 +1,9 @@
 # Import libraries
 import streamlit as st
 import numpy as np
-import pickle
 
-# Load saved model
-try:
-    with open("model.pkl", "rb") as file:
-        model = pickle.load(file)
-
-except Exception as e:
-    st.error(f"Error loading model: {e}")
-    st.stop()
+df = pd.read_csv(url)
+model.fit(X, y)
 
 # App title
 st.set_page_config(page_title="GlycoAID", page_icon="🩺")
