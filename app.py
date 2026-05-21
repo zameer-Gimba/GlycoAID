@@ -1,13 +1,23 @@
+# Import libraries
 import streamlit as st
 import numpy as np
-import joblib
+import pickle
+
+# Load saved model
+try:
+    with open("model.pkl", "rb") as file:
+        model = pickle.load(file)
+
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+    st.stop()
 
 # App title
 st.set_page_config(page_title="GlycoAID", page_icon="🩺")
 
 st.title("🩺 GlycoAID – Diabetes Risk Prediction System")
 
-st.write("Enter patient medical details below.")
+st.write("Enter patient details below.")
 
 # User inputs
 pregnancies = st.number_input("Pregnancies", min_value=0)
@@ -26,7 +36,7 @@ dpf = st.number_input("Diabetes Pedigree Function", min_value=0.0)
 
 age = st.number_input("Age", min_value=1)
 
-# Prediction button
+# Predict button
 if st.button("Predict Diabetes Risk"):
 
     input_data = np.array([[
@@ -40,16 +50,13 @@ if st.button("Predict Diabetes Risk"):
         age
     ]])
 
-    # Scale input
-    input_scaled = scaler.transform(input_data)
+    # Make prediction
+    prediction = model.predict(input_data)
 
-    # Prediction
-    prediction = model.predict(input_scaled)
+    # Probability score
+    probability = model.predict_proba(input_data)
 
-    # Probability
-    probability = model.predict_proba(input_scaled)
-
-    # Output
+    # Display result
     if prediction[0] == 1:
 
         st.error("🚨 High Risk of Diabetes")
