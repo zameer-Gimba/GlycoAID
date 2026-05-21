@@ -35,7 +35,6 @@ https://raw.githubusercontent.com/plotly/datasets/master/diabetes.csv
 - Pandas
 - NumPy
 - Scikit-learn
-- Joblib
 - Streamlit
 
 ---
