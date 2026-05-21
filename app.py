@@ -2,15 +2,6 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# Load model and scaler
-try:
-    model = joblib.load("model.pkl")
-    scaler = joblib.load("scaler.pkl")
-
-except Exception as e:
-    st.error(f"Error loading files: {e}")
-    st.stop()
-
 # App title
 st.set_page_config(page_title="GlycoAID", page_icon="🩺")
 
