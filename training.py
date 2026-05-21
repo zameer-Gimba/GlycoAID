@@ -1,9 +1,9 @@
 # Import libraries
 import pandas as pd
 import numpy as np
+import pickle
 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
@@ -13,7 +13,7 @@ url = "https://raw.githubusercontent.com/plotly/datasets/master/diabetes.csv"
 
 df = pd.read_csv(url)
 
-# Replace invalid zeros with NaN
+# Fix invalid zero values
 cols_to_fix = ["Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI"]
 
 for col in cols_to_fix:
@@ -24,7 +24,7 @@ for col in cols_to_fix:
 X = df.drop("Outcome", axis=1)
 y = df["Outcome"]
 
-# Train test split
+# Train-test split
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -32,18 +32,12 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42
 )
 
-# Scale data
-scaler = StandardScaler()
-
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-# Logistic Regression
+# Logistic Regression Model
 log_model = LogisticRegression(max_iter=1000)
 
 log_model.fit(X_train, y_train)
 
-# Decision Tree
+# Decision Tree Model
 tree_model = DecisionTreeClassifier()
 
 tree_model.fit(X_train, y_train)
@@ -62,5 +56,8 @@ print("Tree Accuracy:", tree_acc)
 # Select best model
 best_model = log_model if log_acc > tree_acc else tree_model
 
+# Save model using pickle
+with open("model.pkl", "wb") as file:
+    pickle.dump(best_model, file)
 
-print("Model and scaler saved successfully!")
+print("Model saved successfully!")
