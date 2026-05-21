@@ -104,13 +104,13 @@ if st.button("Predict Diabetes Risk"):
 
         st.error("🚨 High Risk of Diabetes")
 
-        st.write(f"Risk Probability: {probability[0][1] * 100:.2f}%")
+        st.write(f"High Risk Probability: {probability[0][1] * 100:.2f}%")
 
     else:
 
         st.success("✅ Low Risk of Diabetes")
 
-        st.write(f"Risk Probability: {probability[0][0] * 100:.2f}%")
+        st.write(f"Low Risk Probability: {probability[0][0] * 100:.2f}%")
 
 # Disclaimer
 st.warning(
