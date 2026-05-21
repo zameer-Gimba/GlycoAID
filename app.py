@@ -94,10 +94,10 @@ if st.button("Predict Diabetes Risk"):
     ]])
 
     # Make prediction
-    prediction = model.predict(input_data)
+    prediction = best_model.predict(input_data)
 
     # Probability score
-    probability = model.predict_proba(input_data)
+    probability = best_model.predict_proba(input_data)
 
     # Display result
     if prediction[0] == 1:
