@@ -1,7 +1,6 @@
 # Import libraries
 import pandas as pd
 import numpy as np
-import pickle
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -56,8 +55,3 @@ print("Tree Accuracy:", tree_acc)
 # Select best model
 best_model = log_model if log_acc > tree_acc else tree_model
 
-# Save model using pickle
-with open("model.pkl", "wb") as file:
-    pickle.dump(best_model, file)
-
-print("Model saved successfully!")
